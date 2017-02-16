@@ -1,8 +1,12 @@
 //takes two parameters 
 //first parameter is the size of the board (sudoku is 9)
 //second parameter is the number of initial variables
+//outputs in cnf
+//newline at end of file
 
 public class a{
+	
+	public static int CNFmultiplier = 10;
 	
 	public static void sudoku( int n, int initVar){
 		int[][] board = new int[n][n];
@@ -34,11 +38,24 @@ public class a{
 			board[row][col] = cellValue;				
 		}		
 		
+		//array to store the output in cnf
+		int[] output = new int[initVar];
+		int count = 0;
 		for(int i=0; i<n; i++){
 			for(int j=0; j<n; j++){
-				System.out.print("\t"+board[i][j] );
+				//uncomment the next line to print grid
+				//System.out.print("\t"+board[i][j] );
+				if(board[i][j]!=0) {
+					output[count++] = ((i+1)*CNFmultiplier*CNFmultiplier) + ((j+1)*CNFmultiplier) + board[i][j];
+				}
 			}
-			System.out.println();
+			//uncomment the next line to prnt grid
+			//System.out.println();
+		}
+		
+		//printing the output loop
+		for(int i=0; i<initVar; i++) {
+			System.out.print(output[i]+"\n");
 		}
 		
 	}
