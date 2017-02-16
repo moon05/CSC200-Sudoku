@@ -16,24 +16,23 @@ public class a{
 		
 		//filling in initVar
 		int col, row, cellValue;
-		col = (int)(Math.random()*9);
-		row = (int)(Math.random()*9);
-		cellValue = 1 + (int)(Math.random()*9);
+		col = (int)(Math.random()*n);
+		row = (int)(Math.random()*n);
+		cellValue = 1 + (int)(Math.random()*n);
 		
 		//this loop will go initVar times
 		for( int i=0; i<initVar; i++){	
 			//now pick a random(1-9) for col and row and cellValue
-			col = (int)(Math.random()*9);
-			row = (int)(Math.random()*9);
-			cellValue = 1 + (int)(Math.random()*9);
-			while (board[row][col]==0){
-				col = (int)(Math.random()*9);
-				row = (int)(Math.random()*9);
-				cellValue = 1 + (int)(Math.random()*9);
+			col = (int)(Math.random()*n);
+			row = (int)(Math.random()*n);
+			cellValue = 1 + (int)(Math.random()*n);
+			//if cell is already filled, repeat iteration
+			if(board[row][col]!=0){
+				i--;
+				continue;
 			}
-				
-		}
-		
+			board[row][col] = cellValue;				
+		}		
 		
 		for(int i=0; i<n; i++){
 			for(int j=0; j<n; j++){
