@@ -1,3 +1,7 @@
+//takes two parameters 
+//first parameter is the size of the board (sudoku is 9)
+//second parameter is the number of initial variables
+
 public class a{
 	
 	public static void sudoku( int n, int initVar){
@@ -12,7 +16,9 @@ public class a{
 		
 		//filling in initVar
 		int col, row, cellValue;
-		col = row = cellValue = 0;
+		col = (int)(Math.random()*9);
+		row = (int)(Math.random()*9);
+		cellValue = 1 + (int)(Math.random()*9);
 		
 		//this loop will go initVar times
 		for( int i=0; i<initVar; i++){	
@@ -21,7 +27,9 @@ public class a{
 			row = (int)(Math.random()*9);
 			cellValue = 1 + (int)(Math.random()*9);
 			while (board[row][col]==0){
-				board[row][col] = cellValue;
+				col = (int)(Math.random()*9);
+				row = (int)(Math.random()*9);
+				cellValue = 1 + (int)(Math.random()*9);
 			}
 				
 		}
