@@ -38,8 +38,8 @@ def collect_sets():
         column_s.discard(0)
         row_sets.append(row_s)
         column_sets.append(column_s)
-    #print(row_sets)
-    #print(column_sets)
+    print(row_sets)
+    print(column_sets)
 
 def count_options():
     count = 0
@@ -54,7 +54,7 @@ def main():
     for row in board:
         print(row)
     collect_sets()
-    count_options()
+    #count_options()
 if __name__ == "__main__":
     #main(sys.argv[1:])
     main()
