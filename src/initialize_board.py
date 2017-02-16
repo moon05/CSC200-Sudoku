@@ -18,28 +18,31 @@ c_set = [set([i for i in range(1,dim + 1)]) for _ in range(dim)]
 #block set
 b_set = [[set([i for i in range(1,dim + 1)]) for _ in range(int(sqrt(dim)))] for _ in range(int(sqrt(dim)))]
 #used cell set
-used_cells = set([None])
+used_cells = set([])
 #initialized vector
 v_init=[]
+
+cfile= open("test_c.txt", 'w')
+file = open("test.txt", 'w')
 def initialize(dim, num_init, god=0):
     #initialize i = zero elements initialized
     i=0
     #while board isn't filled
     while i < num_init:
         #randomly select number between 1 and dim (inclusive) and assign to row
-        row = randy(1,dim)
+        row = randy(1,len(r_set))
         #randomly select number between 1 and dim (inclusive) and assign to column
-        col = randy(1,dim)
+        col = randy(1,len(c_set))
         #convert cell to str
         str_cell = str(row) + str(col)
         #check to see that cell is not filled
         if str_cell not in used_cells:
             #add to used cells
-            used_cells.update(str_cell)
+            used_cells.add(str_cell)
             #if we are not checking for conflicts
             if god == 0:
                 #select a random number between 1 and dim
-                value = randy(1,9)
+                value = randy(1,dim)
                 #convert row col and value to proper minisat form and add to initialized vector
                 v_init.append(row*factor**2 + (col*factor) + (value))
                 #update initialized amount
@@ -74,9 +77,10 @@ def initialize(dim, num_init, god=0):
                 
                     #convert row col and value to proper minisat form and add to initialized vector
                     v_init.append(row*factor**2 + col*factor + value)
+                    
                 
                     str_cell=str(row) + str(col)
-                    used_cells.update(str_cell)
+                    used_cells.add(str_cell)
                     # remove value from associated sets
                     r_set[row-1].remove(value)
                     c_set[col-1].remove(value)
@@ -84,10 +88,20 @@ def initialize(dim, num_init, god=0):
                 
                     #increment num_init
                     i += 1
-    print(len(v_init) == num_init)
     return v_init 
 
-def main():
-    print(initialize(dim, 54, god=0))
+def main(argv):
+    values = initialize(int(argv[0]), int(argv[1]), god=int(argv[2]))
+    file = open("cnf_files/problem_" + str(dim) + ".txt", 'r')
+    complete_file = open("cnf_files/complete_files/board_size" + str(dim) + "/new.txt", 'w')
+    lineset = file.readlines()
+    for line in lineset:
+        complete_file.write(line)
+    for each in values:
+        complete_file.write(str(each) + " 0\n")
+    file.close()
+    complete_file.close()
+    print("return")
+    return complete_file
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

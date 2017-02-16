@@ -25,6 +25,7 @@ def extract(file,size=9):
         column = int(((num % d**2) - ((num % d**2) % d)) / d)
         value = ((num % d**2) % d)
         place_on_board(value, row, column)
+    return board
         
 def place_on_board(value, row, column):
     board[row-1][column-1] = value
@@ -49,12 +50,12 @@ def count_options():
     print(count)
 def test():
     print(options - (set([1,7,3]) | set([7,4])))
-def main():
-    extract([118,233,246,327,359,372,422,467,554,565,577,641,683,731,786,798,828,835,881,929,974], size=9)
-    for row in board:
-        print(row)
-    collect_sets()
+#def main():
+    #extract([118,233,246,327,359,372,422,467,554,565,577,641,683,731,786,798,828,835,881,929,974], size=9)
+    #for row in board:
+        #print(row)
+    #collect_sets()
     #count_options()
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #main(sys.argv[1:])
-    main()
+    #main()

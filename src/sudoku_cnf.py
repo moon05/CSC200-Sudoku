@@ -10,12 +10,12 @@ import sys
 import itertools as it
 ext=str(sys.argv[1])
 out_file = open('cnf_files/problem_'+ext+'.txt','w')
-
+'''
 cell_file = open('test_files/to_compare/cnf_cell'+ext+'.txt','w')
 row_file = open('test_files/to_compare/cnf_row'+ext+'.txt','w')
 column_file = open('test_files/to_compare/cnf_col'+ext+'.txt','w')
 block_file = open('test_files/to_compare/cnf_block'+ext+'.txt','w')
-
+'''
 def cells(size,m):
     size=int(size)+1
     for r in range(1,size):
@@ -23,11 +23,11 @@ def cells(size,m):
             line=''
             for column in range(1,size):
                 value = m**2*r + m*v + column
-                cell_file.write(str(value) + " ")
+                #cell_file.write(str(value) + " ")
                 line = line + str(value) + " "
-            cell_file.write("0\n")
+            #cell_file.write("0\r")
             out_file.write(line + "0\n")
-            write_negations(negate(line), cell_file)
+            #write_negations(negate(line), cell_file)
             write_negations(negate(line), out_file)
             
 def rows(size,m):
@@ -37,11 +37,11 @@ def rows(size,m):
             line=''
             for column in range(1,size):
                 value = m**2*r + m*column + v
-                row_file.write(str(value) + " ")
+                #row_file.write(str(value) + " ")
                 line = line + str(value) + " "
-            row_file.write("0\n")
+            #row_file.write("0\r")
             out_file.write(line + "0\n")
-            write_negations(negate(line), row_file)
+            #write_negations(negate(line), row_file)
             write_negations(negate(line), out_file)
 
 def columns(size,m):
@@ -51,11 +51,11 @@ def columns(size,m):
             line=''
             for column in range(1,size):
                 value = m**2*column + m*r + v
-                column_file.write(str(value) + " ")
+                #column_file.write(str(value) + " ")
                 line = line + str(value) + " "
-            column_file.write("0\n")
+            #column_file.write("0\r")
             out_file.write(line + "0\n")
-            write_negations(negate(line), column_file)
+            #write_negations(negate(line), column_file)
             write_negations(negate(line), out_file)
             
 def block(size, m):
@@ -78,8 +78,8 @@ def block(size, m):
                     mid = mid_temp
                     first += 1
                 last+= 1
-                block_file.write(block_string + "0\n")
-                write_negations(negate(block_string), block_file)
+                out_file.write(block_string + "0\n")
+                #write_negations(negate(block_string), block_file)
                 write_negations(negate(block_string), out_file)
                 first= first_temp
             last = 1
