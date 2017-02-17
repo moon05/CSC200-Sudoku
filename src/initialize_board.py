@@ -91,7 +91,7 @@ def initialize(dim, num_init, god=0):
     return v_init 
 
 def main(argv):
-    values = initialize(int(argv[0]), int(argv[1]), god=int(argv[2]))
+    values = initialize(int(argv[0]), int(argv[1]), god=0)
     file = open("cnf_files/problem_" + str(dim) + ".txt", 'r')
     complete_file = open("cnf_files/complete_files/board_size" + str(dim) + "/new.txt", 'w')
     lineset = file.readlines()
@@ -101,7 +101,6 @@ def main(argv):
         complete_file.write(str(each) + " 0\n")
     file.close()
     complete_file.close()
-    print("return")
     return complete_file
 if __name__ == "__main__":
     main(sys.argv[1:])

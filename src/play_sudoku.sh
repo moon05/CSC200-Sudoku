@@ -8,8 +8,8 @@ while [ $counter -lt $END_INIT ]
 do
 	for trial in {0..$TRIALS}
 	do
-		FILE=$(python complete_board.py $BSIZE $counter)
-		echo "$FILE.txt"
+		FILE=$(python initialize_board.py $BSIZE $counter)
+		echo "$FILE"
 		minisat $FILE > results/r"$BSIZE"-"$TRIALS"-"$counter"-$trial.txt
 	done
 	let counter+=1
