@@ -1,16 +1,28 @@
 #!/bin/bash
+# ./play_sudoku.sh <trials per initvar> <board size> <start varnum> <end varnum>
 TRIALS=$1
 BSIZE=$2
 START_INIT=$3
 END_INIT=$4
 counter=$3
-while [ $counter -lt $END_INIT ]
+rm cnf_files/fstage/frun/*
+rm results/*
+while [ $counter -le $END_INIT ]
 do
-	for trial in {0..$TRIALS}
+	for trial in $(seq 1 $TRIALS)
 	do
-		FILE=$(python initialize_board.py $BSIZE $counter)
-		echo "$FILE"
-		minisat $FILE > results/r"$BSIZE"-"$TRIALS"-"$counter"-$trial.txt
+		touch temp.txt
+		python initialize_board.py "$BSIZE" "$counter">temp.txt
+		actual_init=$(wc -l temp.txt)
+		echo "tried: $counter -> got: $actual_init"
+		cp cnf_files/fstage/fclean/problem_"$2"_"$counter".txt cnf_files/fstage/frun/problem_"$2"_"$actual_init"_"$trial".cnf 
+		#echo $'\r' >> cnf_files/fstage/frun/problem_"$2"_"$counter"_"$trial".txt
+		while read line; do
+			echo "$line" >> cnf_files/fstage/frun/problem_"$2"_"$counter"_"$trial".cnf
+		done <temp.txt
+		rm temp.txt
+		minisat cnf_files/fstage/frun/problem_"$2"_"$counter"_"$trial".cnf > results/r"$BSIZE"_"$counter"_"$TRIALS"_"$trial".sol
+		echo r"$BSIZE"_"$counter"_"$TRIALS"_"$trial".sol
 	done
 	let counter+=1
 done

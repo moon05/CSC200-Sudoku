@@ -1,1 +1,0 @@
-Reading from standard input... Use '-h' or '--help' for help.

@@ -9,7 +9,8 @@ import math
 import sys
 import itertools as it
 ext=str(sys.argv[1])
-out_file = open('cnf_files/problem_'+ext+'.txt','w')
+v = str(sys.argv[2])
+out_file = open('cnf_files/fstage/fclean/problem_'+ext+'_' + v + '.cnf','w')
 '''
 cell_file = open('test_files/to_compare/cnf_cell'+ext+'.txt','w')
 row_file = open('test_files/to_compare/cnf_row'+ext+'.txt','w')
@@ -114,6 +115,7 @@ def main(argv):
         m = 17
     else:
         m = 10
+    out_file.write("p cnf 999 " + str(11989 + int(argv[1]))+"\n")
     cells(argv[0], m)
     block(argv[0],m)
     rows(argv[0], m)
