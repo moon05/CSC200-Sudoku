@@ -5,12 +5,14 @@ Created on Mon Feb 13 23:04:52 2017
 @author: Owner
 """
 import sys
-board = [[0]*int(sys.argv[1]) for _ in range(int(sys.argv[1]))]
-board_T = [[0]*int(sys.argv[1]) for _ in range(int(sys.argv[1]))]
-options = set(i for i in range(1,int(sys.argv[1])+1))
+#board = [[0] *9 ] * 9
+board = [[0]*9 for _ in range(9)]
+#board = [[0]*int(sys.argv[1]) for _ in range(int(sys.argv[1]))]
+#board_T = [[0]*int(sys.argv[1]) for _ in range(int(sys.argv[1]))]
+#options = set(i for i in range(1,int(sys.argv[1])+1))
 
-row_sets = []
-column_sets = []
+#row_sets = []
+#column_sets = []
 
 def extract(file,size=9):
     value = 0
@@ -29,7 +31,7 @@ def extract(file,size=9):
         
 def place_on_board(value, row, column):
     board[row-1][column-1] = value
-    board_T[column-1][row-1] = value
+    #board_T[column-1][row-1] = value
     
 def collect_sets():
     for row, column in zip(board, board_T):
@@ -50,12 +52,13 @@ def count_options():
     print(count)
 def test():
     print(options - (set([1,7,3]) | set([7,4])))
-#def main():
-    #extract([118,233,246,327,359,372,422,467,554,565,577,641,683,731,786,798,828,835,881,929,974], size=9)
-    #for row in board:
-        #print(row)
+'''
+def main():
+    extract([118,233,246,327,359,372,422,467,554,565,577,641,683,731,786,798,828,835,881,929,974], size=9)
+    for row in board:
+        print(row)
     #collect_sets()
     #count_options()
-#if __name__ == "__main__":
-    #main(sys.argv[1:])
-    #main()
+if __name__ == "__main__":
+    main()
+'''

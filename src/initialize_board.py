@@ -25,7 +25,7 @@ v_init=[]
 
 #cfile= open("test_c.txt", 'w')
 #file = open("test.txt", 'w')
-def initialize(dim, num_init, god=1):
+def initialize(dim, num_init, god):
     stop=0
     #initialize i = zero elements initialized
     i=0
@@ -132,7 +132,7 @@ def outsource(row_s, col_s, block_s, factor):
             r+=1
                             
 def main(argv):
-    values = initialize(int(argv[0]), int(argv[1]), god=1)
+    values = initialize(int(argv[0]), int(argv[1]), int(argv[2]))
     for each in values:
         print(str(each) + " " + str(0))
     b = board.extract(v_init, 9)
