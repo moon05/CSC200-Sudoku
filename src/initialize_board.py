@@ -98,6 +98,21 @@ def initialize(dim, num_init, god):
     
 def outsource(row_s, col_s, block_s, factor):
     #print(used_cells)
+    if factor == 10:
+        rb_1=4
+        rb_2=7
+        rb_3=10
+        cb_1=4
+        cb_2=7
+        cb_3=10
+    else:
+        rb_1=5
+        rb_2=9
+        rb_3=13
+        cb_1=5
+        cb_2=9
+        cb_3=13
+        
     for each_row in row_s:
         r=1
         for each_rval in list(each_row):
@@ -108,18 +123,22 @@ def outsource(row_s, col_s, block_s, factor):
                     if each_rval == each_cval:
                         br=0
                         bc=0
-                        if r < 4:
+                        if r < rb_1:
                             br=0
-                        elif r < 7:
+                        elif r < rb_2:
                             br=1
-                        elif r < 10:
+                        elif r < rb_3:
                             br=2
-                        if c < 4:
+                        else:
+                            br=3
+                        if c < cb_1:
                             bc=0
-                        elif c < 7:
+                        elif c < cb_2:
                             bc=1
-                        elif c < 10:
+                        elif c < cb_3:
                             bc=2
+                        else:
+                            bc=3
                         #print("\n" + str_cell + " is used -->" + str(str_cell in used_cells), end='')
                         if each_rval in block_s[br][bc]:
                             if str_cell not in used_cells:
@@ -135,7 +154,7 @@ def main(argv):
     values = initialize(int(argv[0]), int(argv[1]), int(argv[2]))
     for each in values:
         print(str(each) + " " + str(0))
-    b = board.extract(v_init, 9)
+    #b = board.extract(v_init, 9)
    # print()
     #print(len(v_init))
     #print(len(used_cells))

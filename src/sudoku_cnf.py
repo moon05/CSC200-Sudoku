@@ -10,7 +10,7 @@ import sys
 import itertools as it
 ext=str(sys.argv[1])
 v = str(sys.argv[2])
-out_file = open('cnf_files/fstage/fclean/problem_'+ext+'_' + v + '.cnf','w')
+out_file = open('data/cnf_files/fstage/fclean/'+ ext+ '/problem_'+ext+'_' + v + '.txt','w')
 '''
 cell_file = open('test_files/to_compare/cnf_cell'+ext+'.txt','w')
 row_file = open('test_files/to_compare/cnf_row'+ext+'.txt','w')
@@ -113,9 +113,13 @@ def negate(clause):
 def main(argv):
     if int(argv[0]) > 9:
         m = 17
+        variables=5832
+        clauses=123904
     else:
         m = 10
-    out_file.write("p cnf 999 " + str(11989 + int(argv[1]))+"\n")
+        variables=999
+        clauses=11988
+    out_file.write("p cnf " + str(variables) +" " + str(clauses + int(argv[1]))+"\n")
     cells(argv[0], m)
     block(argv[0],m)
     rows(argv[0], m)
