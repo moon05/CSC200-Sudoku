@@ -9,7 +9,7 @@ set style line 3 lc rgb '#09ad00' lt 1 lw 1.5 # --- green
 set style line 4 lc rgb "red" lt 1 lw 1.5 # --- green
 set term png
 set output 'plots/sat_9.png'
-set title '%SAT vs Ratio'
+set title '%SAT vs Ratio of Initialized Squares to Board Size'
 set xlabel 'Ratio'
 set ylabel '% SAT'
 set grid
@@ -21,4 +21,7 @@ plot "summary_for_size_9.txt" using 1:2 title "2 Trials" with lines
 ###############
 set output 'plots/sat_16.png'
 plot "summary_for_size_16.txt" using 1:2 title "2 Trials" with lines
+##############
+set output 'plots/plot_sat_overlap.png'
+plot "summary_for_size_9.txt" using 1:2 title "9 X 9 500 trials" with lines, "summary_for_size_16.txt" using 1:2 title "16 X 16 500 trials" with lines
 EOF

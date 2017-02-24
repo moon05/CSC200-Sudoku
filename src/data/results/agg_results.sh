@@ -3,8 +3,10 @@ total_sat=0
 total_solved=0
 first_in=0
 rm ../summary_results/*.txt
+echo "sorting"
 for file in `ls *.sol | sort -V`
 do
+	echo "done sorting"
 	num_now=$(python -c "f = '$file'.split('_')[1]; print(f,end='')")
 	size=$(python -c "f = '$file'.split('_')[0].replace('r', ''); print(f,end='')")
 	if [[ "$first_in" != 0 ]]
@@ -14,6 +16,7 @@ do
 			psat=$(python -c "print( int('$total_sat')/int('$total_solved'), end='')")
 			ratio=$(python -c "demon=int('$size') * int('$size'); print(int('$num_now')/int(demon), end='')")
 			printf "$ratio $psat\n" >> ../summary_results/summary_for_size_"$size".txt
+			echo "$ratio $psat\n"
 			let total_sat=0
 			let total_solved=0
 		fi
