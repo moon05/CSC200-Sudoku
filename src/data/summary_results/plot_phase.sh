@@ -30,12 +30,16 @@ set ylabel 'Number of Decisions'
 set output 'plots/plot_dec_9.png'
 plot "summary_9.txt" using 1:3 title '9 X 9 500 trials' with lines
 ############
+set output 'plots/16_hard.png'
 plot "summary_16.txt" using 1:3 title '16 X 16 500 trials' with lines
 ############
+set output 'plots/9_hard.png'
 plot "summary_9.txt" using 1:3 title '9 X 9 500 trials' with lines, "summary_16.txt" using 1:3 title '16 X 16 500 trials'
 ###########
 set title 'Hardness Density'
+set output 'plots/density.png'
 plot "density_s_16.txt" u 1:2 title 'Satisfiable Problems' with circles lc rgb "blue", 'density_u_16.txt' u 1:2 title 'Unsatisfiable Problems' with circles lc rgb "red"
 set logscale y 10
+set output 'plots/density_log.png'
 plot "density_s_16.txt" u 1:2 title 'Satisfiable Problems' with circles lc rgb "blue", 'density_u_16.txt' u 1:2 title 'Unsatisfiable Problems' with circles lc rgb "red"
 EOF
