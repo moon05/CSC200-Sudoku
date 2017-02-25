@@ -17,11 +17,25 @@ set key below
 #############
 # SAT Graph #
 #############
-plot "summary_for_size_9.txt" using 1:2 title "2 Trials" with lines
+plot "summary_9.txt" using 1:2 title "2 Trials" with lines
 ###############
 set output 'plots/sat_16.png'
-plot "summary_for_size_16.txt" using 1:2 title "2 Trials" with lines
+plot "summary_16.txt" using 1:2 title "2 Trials" with lines
 ##############
 set output 'plots/plot_sat_overlap.png'
-plot "summary_for_size_9.txt" using 1:2 title "9 X 9 500 trials" with lines, "summary_for_size_16.txt" using 1:2 title "16 X 16 500 trials" with lines
+plot "summary_9.txt" using 1:2 title "9 X 9 500 trials" with lines, "summary_16.txt" using 1:2 title "16 X 16 500 trials" with lines
+#############
+set title 'Ratio vs Number of Decisions'
+set ylabel 'Number of Decisions'
+set output 'plots/plot_dec_9.png'
+plot "summary_9.txt" using 1:3 title '9 X 9 500 trials' with lines
+############
+plot "summary_16.txt" using 1:3 title '16 X 16 500 trials' with lines
+############
+plot "summary_9.txt" using 1:3 title '9 X 9 500 trials' with lines, "summary_16.txt" using 1:3 title '16 X 16 500 trials'
+###########
+set title 'Hardness Density'
+plot "density_s_16.txt" u 1:2 title 'Satisfiable Problems' with circles lc rgb "blue", 'density_u_16.txt' u 1:2 title 'Unsatisfiable Problems' with circles lc rgb "red"
+set logscale y 10
+plot "density_s_16.txt" u 1:2 title 'Satisfiable Problems' with circles lc rgb "blue", 'density_u_16.txt' u 1:2 title 'Unsatisfiable Problems' with circles lc rgb "red"
 EOF

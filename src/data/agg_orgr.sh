@@ -4,9 +4,9 @@ rm med_dec.txt
 for directory in org_results/*
 do
 	#echo "$directory"
-	size=$(python -c "f = '$directory'.replace('/','_').split('_')[2][1:]; print(f,end='')")
+	size=$(python3 -c "f = '$directory'.replace('/','_').split('_')[2][1:]; print(f,end='')")
 	#echo "SIZE: $size"
-	top=$(python -c "f = '$directory'.replace('/','_').split('_')[3]; print(f,end='')")
+	top=$(python3 -c "f = '$directory'.replace('/','_').split('_')[3]; print(f,end='')")
 	#echo "TOP: $top"
 	total_sat=0
 	total_solved=0
@@ -14,7 +14,7 @@ do
 	for file in "$directory"/*
 	do
 		#echo "FILE: $file"
-		ratio=$(python -c "demon=int('$size') * int('$size'); print(int('$top')/int(demon), end='')")
+		ratio=$(python3 -c "demon=int('$size') * int('$size'); print(int('$top')/int(demon), end='')")
 		#echo "RATIO: $ratio"
 		sat=$(awk '/^SAT/ {print 1}' "$file")
 		#echo "SAT: $sat"
@@ -26,13 +26,13 @@ do
 		else
 			printf "$ratio $dec \n" >> summary_results/density_u_"$size".txt
 		fi
-		echo "$ratio $dec"
+		#echo "$ratio $dec"
 		total_sat=$((total_sat + sat))
 		let total_solved+=1
 	done
 	med=$(sort -n med_dec.txt | awk '{c[NR]=$1} END {print c[int(NR/2+1)]}')
 	rm med_dec.txt
-	psat=$(python -c "print( int('$total_sat')/int('$total_solved'), end='')")
+	psat=$(python3 -c "print( int('$total_sat')/int('$total_solved'), end='')")
 	printf "$ratio $psat $med \n" >> summary_results/summary_"$size".txt
 	echo "next directory"
 done
